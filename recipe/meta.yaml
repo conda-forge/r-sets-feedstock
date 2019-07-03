@@ -1,5 +1,4 @@
-{% set version = '1.0-17' %}
-
+{% set version = '1.0-18' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,35 +7,36 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: sets_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/sets_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/sets/sets_{{ version }}.tar.gz
-  sha256: 17817a386d725a458d95368795e4c31ef5dbc00439df24daf9bda996bfe767c5
+    - {{ cran_mirror }}/src/contrib/sets_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/sets/sets_{{ version }}.tar.gz
+  sha256: 74d1e057e5b84197edb120665831d7b0565e2945e903be56c6701e724131679b
 
 build:
   merge_build_host: True  # [win]
-  number: 1002
-  skip: true  # [win32]
-
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
   host:
     - r-base
-
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
 
 test:
   commands:
-    - $R -e "library('sets')"  # [not win]
+    - $R -e "library('sets')"           # [not win]
     - "\"%R%\" -e \"library('sets')\""  # [win]
 
 about:
@@ -45,11 +45,24 @@ about:
   summary: Data structures and basic operations for ordinary sets, generalizations such as fuzzy
     sets, multisets, and fuzzy multisets, customizable sets, and intervals.
   license_family: GPL2
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
 
 extra:
   recipe-maintainers:
-    - dpryan79
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
+    - conda-forge/r
+
+# Package: sets
+# Version: 1.0-18
+# Title: Sets, Generalized Sets, Customizable Sets and Intervals
+# Description: Data structures and basic operations for ordinary sets, generalizations such as fuzzy sets, multisets, and fuzzy multisets, customizable sets, and intervals.
+# Authors@R: c(person(given = "David", family = "Meyer", role = c("aut", "cre"), email = "David.Meyer@R-project.org"), person(given = "Kurt", family = "Hornik", role = c("aut")), person(given = "Christian", family = "Buchta", role = "ctb"))
+# Depends: R (>= 2.7.0)
+# Suggests: proxy
+# Imports: graphics,grDevices,stats,utils
+# License: GPL-2
+# NeedsCompilation: yes
+# Packaged: 2017-12-11 22:04:47 UTC; meyer
+# Author: David Meyer [aut, cre], Kurt Hornik [aut], Christian Buchta [ctb]
+# Maintainer: David Meyer <David.Meyer@R-project.org>
+# Repository: CRAN
+# Date/Publication: 2017-12-12 06:47:44 UTC
