@@ -1,4 +1,4 @@
-{% set version = '1.0-18' %}
+{% set version = "1.0-19" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/sets_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/sets/sets_{{ version }}.tar.gz
-  sha256: 74d1e057e5b84197edb120665831d7b0565e2945e903be56c6701e724131679b
+  sha256: ae93e56bb0b4fd361349faf962772bb5eab965966e9c9bbf8bd4a2426a2e28a0
 
 build:
-  merge_build_host: True  # [win]
-  number: 2
+  merge_build_host: true  # [win]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -42,10 +42,9 @@ test:
 about:
   home: https://CRAN.R-project.org/package=sets
   license: GPL-2
-  summary: Data structures and basic operations for ordinary sets, generalizations such as fuzzy
-    sets, multisets, and fuzzy multisets, customizable sets, and intervals.
+  summary: Data structures and basic operations for ordinary sets, generalizations such as fuzzy sets, multisets, and fuzzy multisets, customizable sets, and intervals.
   license_family: GPL2
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
 
 extra:
   recipe-maintainers:
