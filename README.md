@@ -1,11 +1,22 @@
+About r-sets-feedstock
+======================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-sets-feedstock/blob/main/LICENSE.txt)
+
 About r-sets
-============
+------------
 
 Home: https://CRAN.R-project.org/package=sets
 
 Package license: GPL-2.0-only
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-sets-feedstock/blob/main/LICENSE.txt)
+Summary: Data structures and basic operations for ordinary sets, generalizations such as fuzzy sets, multisets, and fuzzy multisets, customizable sets, and intervals.
+About r-sets
+------------
+
+Home: https://CRAN.R-project.org/package=sets
+
+Package license: GPL-2.0-only
 
 Summary: Data structures and basic operations for ordinary sets, generalizations such as fuzzy sets, multisets, and fuzzy multisets, customizable sets, and intervals.
 
